@@ -10,6 +10,8 @@ namespace AT_AutomationtestStore.PageObjects
     public class IndexPage : BasePage<IndexPage>
     {
         private readonly By loginOrRegisteBy = By.CssSelector("a[href*='account/login']");
+        private readonly By specialBy = By.CssSelector("a[href*='product/special']");
+
         public IndexPage(IWebDriver driver) : base(driver)
         {
         }
@@ -19,6 +21,11 @@ namespace AT_AutomationtestStore.PageObjects
         {
             driver.FindElement(loginOrRegisteBy).Click();
             return new LoginPage(driver);
+        }
+        public SpecialPage EnterSpecialPage()
+        {
+            driver.FindElement(specialBy).Click();
+            return new SpecialPage(driver);
         }
     }
 }
