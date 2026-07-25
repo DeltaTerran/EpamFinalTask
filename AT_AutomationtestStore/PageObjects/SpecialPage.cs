@@ -10,8 +10,9 @@ namespace AT_AutomationtestStore.PageObjects
 {
     public class SpecialPage : BasePage<SpecialPage>
     {
-        private readonly By productsBy = By.CssSelector(".col-md-3");
-        private readonly By productNameBy = By.CssSelector(".prdocutname");
+        private readonly By productsBy = By.CssSelector(
+        "#maincontainer .col-md-3.col-sm-6.col-xs-12:has(.pricenew):has(.priceold)");
+        private readonly By productNameBy = By.CssSelector("a[class='prdocutname']");
         private readonly By productOldPriceBy = By.CssSelector(".priceold");
         private readonly By productNewPriceBy = By.CssSelector(".pricenew");
         public SpecialPage(IWebDriver driver) : base(driver)

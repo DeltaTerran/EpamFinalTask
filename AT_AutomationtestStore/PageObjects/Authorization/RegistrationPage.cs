@@ -10,8 +10,6 @@ namespace AT_AutomationtestStore.PageObjects.Authorization
 {
     public class RegistrationPage : BasePage<RegistrationPage>
     {
-        private const int firstNameMinCharacters = 1;
-        private const int firstNameMaxCharacters = 32;
 
         private readonly By firstNameBy = By.CssSelector("input[name='firstname']");
         private readonly By lastNameBy = By.CssSelector("input[name='lastname']");
