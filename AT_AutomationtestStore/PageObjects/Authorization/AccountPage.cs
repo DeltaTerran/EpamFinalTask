@@ -8,8 +8,6 @@ namespace AT_AutomationtestStore.PageObjects.Authorization
 {
     public class AccountPage : BasePage<AccountPage>
     {
-        private readonly By myAccountHeaderBy =
-         By.CssSelector(".maintext");
 
         private readonly By myAccountUserNameBy =
             By.CssSelector(".subtext");

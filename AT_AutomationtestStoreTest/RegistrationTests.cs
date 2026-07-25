@@ -41,7 +41,10 @@ namespace AT_AutomationtestStoreTest
             var registrationPage = new RegistrationPage(Driver);
 
             //Act
-            registrationPage.Open().SubmitWrongRegistration();
+            var errorMessage = registrationPage.Open().SubmitWrongRegistration().getLoginErrorlabelText();
+
+            //Assert
+            errorMessage.Should().Contain($"Login name must be alphanumeric only and between 5 and 64 characters!");
 
         }
     }

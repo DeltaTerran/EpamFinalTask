@@ -10,6 +10,9 @@ namespace AT_AutomationtestStore.PageObjects.Authorization
 {
     public class RegistrationPage : BasePage<RegistrationPage>
     {
+        private const int firstNameMinCharacters = 1;
+        private const int firstNameMaxCharacters = 32;
+
         private readonly By firstNameBy = By.CssSelector("input[name='firstname']");
         private readonly By lastNameBy = By.CssSelector("input[name='lastname']");
         private readonly By emailBy = By.CssSelector("input[name='email']");
@@ -23,7 +26,7 @@ namespace AT_AutomationtestStore.PageObjects.Authorization
         private readonly By ConfirmPasswordBy = By.CssSelector("input[name='confirm']");
         private readonly By SubmitButtonBy = By.CssSelector("button[title='Continue']");
         private readonly By PolicyRadioButtonBy = By.CssSelector("input[name='agree']");
-
+        private readonly By loginErrorLabel = By.CssSelector(".form-group:has(#AccountFrm_loginname) .help-block");
         public RegistrationPage(IWebDriver driver) : base(driver)
         {
         }
@@ -144,5 +147,6 @@ namespace AT_AutomationtestStore.PageObjects.Authorization
             driver.FindElement(SubmitButtonBy).Click();
             return this;
         }
+        public string getLoginErrorlabelText() => driver.FindElement(loginErrorLabel).Text;
     }
 }
