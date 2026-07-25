@@ -132,13 +132,13 @@ namespace AT_AutomationtestStore.PageObjects.Authorization
                 .InputPassword(user.Password)
                 .InputConfirmPassword(user.Password);
         }
-        public SuccessPage SubmitRegistration()
+        public SuccessPage SubmitSuccessfulRegistration()
         {
             driver.FindElement(PolicyRadioButtonBy).Click();
             driver.FindElement(SubmitButtonBy).Click();
             return new SuccessPage(driver);
         }
-        public RegistrationPage Submit()
+        public RegistrationPage SubmitWrongRegistration()
         {
             driver.FindElement(PolicyRadioButtonBy).Click();
             driver.FindElement(SubmitButtonBy).Click();
