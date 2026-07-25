@@ -14,7 +14,7 @@ namespace AT_AutomationtestStore.PageObjects.Authorization
         {
         }
 
-        protected override string Url => ConfigurationReader.BaseUrl + "/index.php?rt=account/login";
+        protected override string Url => ConfigurationReader.BaseUrl + "?rt=account/login";
         public RegistrationPage RegisterButtonClick()
         {
             driver.FindElement(RegisterButtonBy).Click();

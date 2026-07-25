@@ -1,4 +1,5 @@
 ﻿using AT_AutomationtestStore.Configuration;
+using AT_AutomationtestStore.Models;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -20,13 +21,14 @@ namespace AT_AutomationtestStore.PageObjects.Authorization
         private readonly By LoginBy = By.CssSelector("input[name='loginname']");
         private readonly By PasswordBy = By.CssSelector("input[name='password']");
         private readonly By ConfirmPasswordBy = By.CssSelector("input[name='confirm']");
-        private readonly By SubmitButton = By.CssSelector("button[title='Continue']");
+        private readonly By SubmitButtonBy = By.CssSelector("button[title='Continue']");
+        private readonly By PolicyRadioButtonBy = By.CssSelector("input[name='agree']");
 
         public RegistrationPage(IWebDriver driver) : base(driver)
         {
         }
 
-        protected override string Url => ConfigurationReader.BaseUrl + "/index.php?rt=account/create";
+        protected override string Url => ConfigurationReader.BaseUrl + "?rt=account/create";
         public RegistrationPage InputFirstName(string input)
         {
             driver.FindElement(firstNameBy).SendKeys(input);
@@ -81,7 +83,7 @@ namespace AT_AutomationtestStore.PageObjects.Authorization
             return this;
         }
 
-        public RegistrationPage inputCountry(string zoneName)
+        public RegistrationPage InputCountry(string zoneName)
         {
             var select = new SelectElement(driver.FindElement(CountryBy));
 
@@ -114,6 +116,32 @@ namespace AT_AutomationtestStore.PageObjects.Authorization
         public RegistrationPage InputConfirmPassword(string input)
         {
             driver.FindElement(ConfirmPasswordBy).SendKeys(input);
+            return this;
+        }
+        public RegistrationPage FillRegistrationForm(UserRegistrationData user)
+        {
+            return InputFirstName(user.FirstName)
+                .InputLastName(user.LastName)
+                .InputEmail(user.Email)
+                .InputAddress(user.Address)
+                .InputCity(user.City)
+                .InputCountry(user.Country)
+                .InputRegion(user.Region)
+                .InputZipCode(user.ZipCode)
+                .InputLogin(user.Login)
+                .InputPassword(user.Password)
+                .InputConfirmPassword(user.Password);
+        }
+        public SuccessPage SubmitRegistration()
+        {
+            driver.FindElement(PolicyRadioButtonBy).Click();
+            driver.FindElement(SubmitButtonBy).Click();
+            return new SuccessPage(driver);
+        }
+        public RegistrationPage Submit()
+        {
+            driver.FindElement(PolicyRadioButtonBy).Click();
+            driver.FindElement(SubmitButtonBy).Click();
             return this;
         }
     }

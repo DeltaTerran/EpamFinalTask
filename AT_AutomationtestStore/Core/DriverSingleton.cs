@@ -7,26 +7,26 @@ namespace AT_AutomationtestStore.Core
 {
     public static class DriverSingleton
     {
-        private static IWebDriver? instance;
+        private static ThreadLocal<IWebDriver?> instance = new();
 
         public static IWebDriver Instance
         {
             get
             {
-                return instance
+                return instance.Value
                     ?? throw new InvalidOperationException(
                         "DriverSingleton is not initialized.");
             }
         }
         public static void Initialize(BrowserType browser)
         {
-                if (instance is not null)
-                {
-                    throw new InvalidOperationException(
-                        "DriverSingleton has already been initialized.");
-                }
+            if (instance.Value is not null)
+            {
+                throw new InvalidOperationException(
+                    "DriverSingleton has already been initialized for the current thread.");
+            }
 
-                instance = BrowserFactory.Create(browser);
+            instance.Value = BrowserFactory.Create(browser);
         }
         public static void Quit()
         {
@@ -37,7 +37,8 @@ namespace AT_AutomationtestStore.Core
 
             try
             {
-                instance.Quit();
+                instance.Value.Quit();
+
             }
             finally
             {
