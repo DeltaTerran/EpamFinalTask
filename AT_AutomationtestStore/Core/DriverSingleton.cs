@@ -30,20 +30,21 @@ namespace AT_AutomationtestStore.Core
         }
         public static void Quit()
         {
-            if (instance is null)
+            var driver = instance.Value;
+            if (driver is null)
             {
                 return;
             }
 
             try
             {
-                instance.Value.Quit();
+                driver.Quit();
 
             }
             finally
             {
-                instance.Dispose();
-                instance = null;
+                driver.Dispose();
+                instance.Value = null;
             }
         }
     }
