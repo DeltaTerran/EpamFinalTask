@@ -1,10 +1,15 @@
-﻿using AT_AutomationtestStore.Configuration;
-using AT_AutomationtestStore.Models;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-
 namespace AT_AutomationtestStore.PageObjects.Authorization
 {
+    using AT_AutomationtestStore.Configuration;
+    using AT_AutomationtestStore.Models;
+    using OpenQA.Selenium;
+    using OpenQA.Selenium.Support.UI;
+
+    /// <summary>
+    /// Represents the account registration page of the Automation Test Store.
+    /// Provides methods for filling in registration fields, submitting the form,
+    /// and retrieving validation messages.
+    /// </summary>
     public class RegistrationPage : BasePage<RegistrationPage>
     {
         private readonly By firstNameBy = By.CssSelector("input[name='firstname']");
@@ -22,45 +27,89 @@ namespace AT_AutomationtestStore.PageObjects.Authorization
         private readonly By policyRadioButtonBy = By.CssSelector("input[name='agree']");
         private readonly By loginErrorLabel = By.CssSelector(".form-group:has(#AccountFrm_loginname) .help-block");
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RegistrationPage"/> class.
+        /// </summary>
+        /// <param name="driver">
+        /// The WebDriver instance used to interact with the registration page.
+        /// </param>
+        public RegistrationPage(IWebDriver driver)
+            : base(driver)
+        {
+        }
+
+        /// <summary>
+        /// Gets the URL of the account registration page.
+        /// </summary>
         protected override string Url => ConfigurationReader.BaseUrl + "?rt=account/create";
 
-        public RegistrationPage(IWebDriver driver) : base(driver)
-        {
-        }
-
+        /// <summary>
+        /// Enters the specified first name into the registration form.
+        /// </summary>
+        /// <param name="input">The first name to enter.</param>
+        /// <returns>The current registration page instance.</returns>
         public RegistrationPage InputFirstName(string input)
         {
-            driver.FindElement(firstNameBy).SendKeys(input);
+            this.Driver.FindElement(this.firstNameBy).SendKeys(input);
             return this;
         }
 
+        /// <summary>
+        /// Enters the specified last name into the registration form.
+        /// </summary>
+        /// <param name="input">The last name to enter.</param>
+        /// <returns>The current registration page instance.</returns>
         public RegistrationPage InputLastName(string input)
         {
-            driver.FindElement(lastNameBy).SendKeys(input);
+            this.Driver.FindElement(this.lastNameBy).SendKeys(input);
             return this;
         }
 
+        /// <summary>
+        /// Enters the specified email address into the registration form.
+        /// </summary>
+        /// <param name="input">The email address to enter.</param>
+        /// <returns>The current registration page instance.</returns>
         public RegistrationPage InputEmail(string input)
         {
-            driver.FindElement(emailBy).SendKeys(input);
+            this.Driver.FindElement(this.emailBy).SendKeys(input);
             return this;
         }
 
+        /// <summary>
+        /// Enters the specified address into the registration form.
+        /// </summary>
+        /// <param name="input">The address to enter.</param>
+        /// <returns>The current registration page instance.</returns>
         public RegistrationPage InputAddress(string input)
         {
-            driver.FindElement(addressBy).SendKeys(input);
+            this.Driver.FindElement(this.addressBy).SendKeys(input);
             return this;
         }
 
+        /// <summary>
+        /// Enters the specified city into the registration form.
+        /// </summary>
+        /// <param name="input">The city to enter.</param>
+        /// <returns>The current registration page instance.</returns>
         public RegistrationPage InputCity(string input)
         {
-            driver.FindElement(cityBy).SendKeys(input);
+            this.Driver.FindElement(this.cityBy).SendKeys(input);
             return this;
         }
 
+        /// <summary>
+        /// Selects the specified region from the region dropdown.
+        /// The lookup is performed without regard to character casing.
+        /// </summary>
+        /// <param name="zoneName">The region name to select.</param>
+        /// <returns>The current registration page instance.</returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown when the specified region cannot be found in the dropdown.
+        /// </exception>
         public RegistrationPage InputRegion(string zoneName)
         {
-            var select = new SelectElement(driver.FindElement(regionBy));
+            var select = new SelectElement(this.Driver.FindElement(this.regionBy));
 
             var option = select.Options
                 .FirstOrDefault(x => x.Text.Equals(zoneName, StringComparison.OrdinalIgnoreCase));
@@ -76,15 +125,29 @@ namespace AT_AutomationtestStore.PageObjects.Authorization
             return this;
         }
 
+        /// <summary>
+        /// Enters the specified ZIP or postal code into the registration form.
+        /// </summary>
+        /// <param name="input">The ZIP or postal code to enter.</param>
+        /// <returns>The current registration page instance.</returns>
         public RegistrationPage InputZipCode(string input)
         {
-            driver.FindElement(zipCodeBy).SendKeys(input);
+            this.Driver.FindElement(this.zipCodeBy).SendKeys(input);
             return this;
         }
 
+        /// <summary>
+        /// Selects the specified country from the country dropdown.
+        /// The lookup is performed without regard to character casing.
+        /// </summary>
+        /// <param name="zoneName">The country name to select.</param>
+        /// <returns>The current registration page instance.</returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown when the specified country cannot be found in the dropdown.
+        /// </exception>
         public RegistrationPage InputCountry(string zoneName)
         {
-            var select = new SelectElement(driver.FindElement(countryBy));
+            var select = new SelectElement(this.Driver.FindElement(this.countryBy));
 
             var option = select.Options
                 .FirstOrDefault(x => x.Text.Equals(zoneName, StringComparison.OrdinalIgnoreCase));
@@ -100,27 +163,49 @@ namespace AT_AutomationtestStore.PageObjects.Authorization
             return this;
         }
 
+        /// <summary>
+        /// Enters the specified login name into the registration form.
+        /// </summary>
+        /// <param name="input">The login name to enter.</param>
+        /// <returns>The current registration page instance.</returns>
         public RegistrationPage InputLogin(string input)
         {
-            driver.FindElement(loginBy).SendKeys(input);
+            this.Driver.FindElement(this.loginBy).SendKeys(input);
             return this;
         }
 
+        /// <summary>
+        /// Enters the specified password into the registration form.
+        /// </summary>
+        /// <param name="input">The password to enter.</param>
+        /// <returns>The current registration page instance.</returns>
         public RegistrationPage InputPassword(string input)
         {
-            driver.FindElement(passwordBy).SendKeys(input);
+            this.Driver.FindElement(this.passwordBy).SendKeys(input);
             return this;
         }
 
+        /// <summary>
+        /// Enters the specified password into the confirmation field.
+        /// </summary>
+        /// <param name="input">The password confirmation value.</param>
+        /// <returns>The current registration page instance.</returns>
         public RegistrationPage InputConfirmPassword(string input)
         {
-            driver.FindElement(confirmPasswordBy).SendKeys(input);
+            this.Driver.FindElement(this.confirmPasswordBy).SendKeys(input);
             return this;
         }
 
+        /// <summary>
+        /// Fills all registration fields using the supplied user data.
+        /// </summary>
+        /// <param name="user">
+        /// The user registration data used to populate the form.
+        /// </param>
+        /// <returns>The current registration page instance.</returns>
         public RegistrationPage FillRegistrationForm(UserRegistrationData user)
         {
-            return InputFirstName(user.FirstName)
+            return this.InputFirstName(user.FirstName)
                 .InputLastName(user.LastName)
                 .InputEmail(user.Email)
                 .InputAddress(user.Address)
@@ -133,20 +218,37 @@ namespace AT_AutomationtestStore.PageObjects.Authorization
                 .InputConfirmPassword(user.Password);
         }
 
+        /// <summary>
+        /// Accepts the privacy policy and submits the registration form,
+        /// expecting successful registration.
+        /// </summary>
+        /// <returns>
+        /// A new <see cref="SuccessPage"/> instance representing
+        /// the expected successful registration page.
+        /// </returns>
         public SuccessPage Register()
         {
-            driver.FindElement(policyRadioButtonBy).Click();
-            driver.FindElement(submitButtonBy).Click();
-            return new SuccessPage(driver);
+            this.Driver.FindElement(this.policyRadioButtonBy).Click();
+            this.Driver.FindElement(this.submitButtonBy).Click();
+            return new SuccessPage(this.Driver);
         }
 
+        /// <summary>
+        /// Accepts the privacy policy and submits the registration form
+        /// while remaining on the current page object.
+        /// </summary>
+        /// <returns>The current registration page instance.</returns>
         public RegistrationPage Submit()
         {
-            driver.FindElement(policyRadioButtonBy).Click();
-            driver.FindElement(submitButtonBy).Click();
+            this.Driver.FindElement(this.policyRadioButtonBy).Click();
+            this.Driver.FindElement(this.submitButtonBy).Click();
             return this;
         }
 
-        public string GetLoginErrorLabelText() => driver.FindElement(loginErrorLabel).Text;
+        /// <summary>
+        /// Gets the validation message displayed for the login name field.
+        /// </summary>
+        /// <returns>The login name validation message text.</returns>
+        public string GetLoginErrorLabelText() => this.Driver.FindElement(this.loginErrorLabel).Text;
     }
 }
