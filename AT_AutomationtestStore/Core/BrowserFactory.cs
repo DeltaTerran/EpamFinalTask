@@ -36,7 +36,7 @@ namespace AT_AutomationtestStore.Core
                     "Unsupported browser."),
             };
 
-            ConfigurateDriver(driver);
+            ConfigureDriver(driver);
             return driver;
         }
 
@@ -110,7 +110,7 @@ namespace AT_AutomationtestStore.Core
         /// <param name="driver">
         /// The WebDriver instance to configure.
         /// </param>
-        private static void ConfigurateDriver(IWebDriver driver)
+        private static void ConfigureDriver(IWebDriver driver)
         {
             driver.Manage().Timeouts().ImplicitWait =
             TimeSpan.Zero;
