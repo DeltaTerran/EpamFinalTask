@@ -2,9 +2,6 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AT_AutomationtestStore.Core
 {
@@ -12,7 +9,7 @@ namespace AT_AutomationtestStore.Core
     {
         public static IWebDriver Create(BrowserType browser)
         {
-            IWebDriver driver = browser switch 
+            IWebDriver driver = browser switch
             {
                 BrowserType.Chrome => CreateChrome(),
                 BrowserType.FireFox => CreateFirefox(),
@@ -22,10 +19,10 @@ namespace AT_AutomationtestStore.Core
                     browser,
                     "Unsupported browser."),
             };
+
             ConfigurateDriver(driver);
             return driver;
         }
-
 
         private static IWebDriver CreateChrome()
         {
@@ -59,6 +56,7 @@ namespace AT_AutomationtestStore.Core
 
             return new ChromeDriver(options);
         }
+
         private static IWebDriver CreateFirefox()
         {
             var options = new FirefoxOptions
@@ -74,6 +72,7 @@ namespace AT_AutomationtestStore.Core
 
             return new FirefoxDriver(options);
         }
+
         private static void ConfigurateDriver(IWebDriver driver)
         {
             driver.Manage().Timeouts().ImplicitWait =

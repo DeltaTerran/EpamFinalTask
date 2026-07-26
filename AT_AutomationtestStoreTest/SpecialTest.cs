@@ -1,8 +1,5 @@
-﻿using AT_AutomationtestStore.PageObjects;
+using AT_AutomationtestStore.PageObjects;
 using FluentAssertions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AT_AutomationtestStoreTest
 {
@@ -11,13 +8,13 @@ namespace AT_AutomationtestStoreTest
         [Fact]
         public void UC3_Products_AllHaveDiscount()
         {
-            //Arrange
-            var specialPage = new SpecialPage(Driver);
+            // Arrange
+            var specialPage = new IndexPage(Driver).Open().EnterSpecialPage();
 
-            //Act
-            var products = specialPage.Open().GetProductPrices();
+            // Act
+            var products = specialPage.GetProductPrices();
 
-            //Assert
+            // Assert
             products.Should().NotBeEmpty();
 
             products.Should().AllSatisfy(product =>

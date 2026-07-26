@@ -7,11 +7,13 @@ namespace AT_AutomationtestStoreTest
     public abstract class BaseTest : IDisposable
     {
         protected IWebDriver Driver => DriverSingleton.Instance;
+
         public BaseTest()
         {
             DriverSingleton.Initialize(
-            ConfigurationReader.Browser);
+                ConfigurationReader.Browser);
         }
+
         public void Dispose()
         {
             DriverSingleton.Quit();
