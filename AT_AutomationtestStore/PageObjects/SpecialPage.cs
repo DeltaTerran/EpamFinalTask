@@ -14,7 +14,7 @@ namespace AT_AutomationtestStore.PageObjects
         private readonly By productsBy = By.CssSelector(
             "#maincontainer div:has(> .fixed_wrapper):has(.thumbnail)");
 
-        private readonly By productNameBy = By.CssSelector("a[class='prdocutname']");
+        private readonly By productNameBy = By.CssSelector("a.prdocutname");
         private readonly By productOldPriceBy = By.CssSelector(".priceold");
         private readonly By productNewPriceBy = By.CssSelector(".pricenew");
 

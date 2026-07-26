@@ -49,11 +49,12 @@ namespace AT_AutomationtestStoreTest
         public void UC2_RegisterNewUser_InvalidData_ShouldGetErrorLabel(string login)
         {
             // Arrange
-            var registrationPage = new RegistrationPage(Driver);
+            var loginPage = new LoginPage(Driver);
 
             // Act
-            var errorMessage = registrationPage
+            var errorMessage = loginPage
                 .Open()
+                .RegisterButtonClick()
                 .InputLogin(login)
                 .Submit()
                 .GetLoginErrorLabelText();
